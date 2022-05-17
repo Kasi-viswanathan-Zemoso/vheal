@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DrugTestController {
+public class DrugControllerTests {
 
     @Autowired
     private DrugService drugService;
@@ -28,7 +28,7 @@ public class DrugTestController {
 
     private Model model;
 
-    public DrugTestController(){
+    public DrugControllerTests(){
         model = new Model() {
             @Override
             public Model addAttribute(String attributeName, Object attributeValue) {
