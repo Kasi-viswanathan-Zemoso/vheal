@@ -2,8 +2,12 @@ package com.vheal;
 
 import com.vheal.dao.DoctorRepository;
 import com.vheal.dao.DrugRepository;
-import com.vheal.entity.Doctor;
-import com.vheal.entity.Drug;
+import com.vheal.dao.PatientRepository;
+import com.vheal.entity.*;
+import com.vheal.service.DoctorImpl;
+import com.vheal.service.DoctorService;
+import com.vheal.service.PatientImpl;
+import com.vheal.service.PatientService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -14,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +30,9 @@ public class DoctorTests {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Test
     @Rollback(value = false)
@@ -87,4 +95,71 @@ public class DoctorTests {
         assertTrue(isExistBeforeDelete);
         assertFalse(notExistAfterDelete);
     }
+
+    @Test
+    @Order(7)
+    public void testCreateDoctorWithId(){
+        Doctor doctor = new Doctor(100,"Viswa","9876543210","23","male","Surgeon","MS","Chennai","Tamil nadu","India");
+        Doctor savedDoctor = doctorRepository.save(doctor);
+        assertNotNull(savedDoctor);
+    }
+
+    @Test
+    @Order(8)
+    public void testCreateDoctorWithGetterSetter(){
+        Doctor doctor = new Doctor();
+        doctor.setId(101);
+        doctor.getId();
+        doctor.setDoctorName("Viswa");
+        doctor.getDoctorName();
+        doctor.setPhoneNo("9876543210");
+        doctor.getPhoneNo();
+        doctor.setAge("23");
+        doctor.getAge();
+        doctor.setGender("male");
+        doctor.getGender();
+        doctor.setSpecialization("Surgeon");
+        doctor.getSpecialization();
+        doctor.setDegree("MS");
+        doctor.getDegree();
+        doctor.setCity("Chennai");
+        doctor.getCity();
+        doctor.setState("Tamil nadu");
+        doctor.getState();
+        doctor.setCountry("India");
+        doctor.getCountry();
+        Doctor savedDoctor = doctorRepository.save(doctor);
+        assertNotNull(savedDoctor);
+    }
+
+    @Test
+    @Order(9)
+    public void testDoctorsUserAndPatient(){
+        Doctor doctor = new Doctor();
+        Patient patient = new Patient();
+        User user = new User();
+        doctor.setUser(user);
+        doctor.getUser();
+        doctor.addPatient(patient);
+        doctor.deletePatient(patient);
+        doctor.setPatients(patientRepository.findAll());
+        doctor.getPatients();
+        Optional<Patient> result = patientRepository.findById(1);
+        Patient existpatient = result.get();
+        doctor.addPatient(patient);
+        doctor.deletePatient(patient);
+    }
+
+    @Test
+    @Order(10)
+    public void testDoctorService() {
+        DoctorService doctorService = new DoctorImpl(doctorRepository);
+        doctorService.findAll();
+        doctorService.findById(1);
+        doctorService.findById(100);
+        Doctor doctor = new Doctor("Viswa","9876543210","23","male","Surgeon","MS","Chennai","Tamil nadu","India");
+        doctorService.save(doctor);
+        doctorService.deleteById(1);
+    }
+
 }

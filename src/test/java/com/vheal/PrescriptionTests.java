@@ -1,8 +1,13 @@
 package com.vheal;
 
+import com.vheal.dao.DrugRepository;
 import com.vheal.dao.PrescriptionRepository;
 import com.vheal.entity.Drug;
+import com.vheal.entity.Patient;
 import com.vheal.entity.Prescription;
+import com.vheal.service.PatientImpl;
+import com.vheal.service.PatientService;
+import com.vheal.service.PrescriptionImpl;
 import com.vheal.service.PrescriptionService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -25,6 +30,9 @@ public class PrescriptionTests {
 
     @Autowired
     private PrescriptionRepository prescriptionRepository;
+
+    @Autowired
+    private DrugRepository drugRepository;
 
     @Test
     @Rollback(value = false)
@@ -86,5 +94,45 @@ public class PrescriptionTests {
         boolean notExistAfterDelete = prescriptionRepository.findById(id).isPresent();
         assertTrue(isExistBeforeDelete);
         assertFalse(notExistAfterDelete);
+    }
+
+    @Test
+    @Order(7)
+    public void testCreatePrescriptionWithId(){
+        Prescription prescription = new Prescription(100,"Drink water a lot","05-05-2020");
+        Prescription savedPrescription = prescriptionRepository.save(prescription);
+        assertNotNull(savedPrescription);
+    }
+
+    @Test
+    @Order(8)
+    public void testCreatePrescriptionWithGetterSetter(){
+        Prescription prescription = new Prescription(100,"Drink water a lot","05-05-2020");
+        prescription.setId(100);
+        prescription.getId();
+        prescription.setSuggestion("Drink water a lot");
+        prescription.getSuggestion();
+        prescription.setDate("05-05-2020");
+        prescription.getDate();
+        Drug drug = drugRepository.getById(1);
+        prescription.addDrug(drug);
+        prescription.deleteDrug(drug);
+        prescription.setDrugs(drugRepository.findAll());
+        prescription.getDrugs();
+        Drug notExistDrug = new Drug();
+        prescription.addDrug(notExistDrug);
+        prescription.deleteDrug(notExistDrug);
+    }
+
+    @Test
+    @Order(9)
+    public void testPrescriptionService() {
+        PrescriptionService prescriptionService = new PrescriptionImpl(prescriptionRepository);
+        prescriptionService.findAll();
+        prescriptionService.findById(1);
+        prescriptionService.findById(100);
+        Prescription prescription = new Prescription("Drink water a lot","05-05-2020");
+        prescriptionService.save(prescription);
+        prescriptionService.deleteById(1);
     }
 }

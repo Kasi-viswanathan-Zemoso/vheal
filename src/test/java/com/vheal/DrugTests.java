@@ -2,6 +2,8 @@ package com.vheal;
 
 import com.vheal.dao.DrugRepository;
 import com.vheal.entity.Drug;
+import com.vheal.service.DrugImpl;
+import com.vheal.service.DrugService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -84,5 +86,43 @@ public class DrugTests {
         boolean notExistAfterDelete = drugRepository.findById(id).isPresent();
         assertTrue(isExistBeforeDelete);
         assertFalse(notExistAfterDelete);
+    }
+
+    @Test
+    @Order(7)
+    public void testCreateDrugWithId(){
+        Drug drug = new Drug(100,"metacin300","tablet");
+        Drug savedDrug = drugRepository.save(drug);
+        assertNotNull(savedDrug);
+    }
+
+    @Test
+    @Order(8)
+    public void testCreateDrugWithSetterAndGetter(){
+        Drug drug = new Drug();
+        drug.setId(101);
+        drug.getId();
+        drug.setDrugName("metacin301");
+        drug.getDrugName();
+        drug.setType("tablet");
+        drug.getType();
+        drug.setPrescriptions(drugRepository.getById(1).getPrescriptions());
+        drug.getPrescriptions();
+        Drug savedDrug = drugRepository.save(drug);
+        assertNotNull(savedDrug);
+    }
+
+    @Test
+    @Order(9)
+    public void testDrugService(){
+        DrugService drugImpl = new DrugImpl(drugRepository);
+        List<Drug> drugs = drugImpl.findAll();
+
+        Drug drug = drugImpl.findById(1);
+        drugImpl.save(drug);
+        Drug invalidDrug = drugImpl.findById(100);
+        drugImpl.deleteById(1);
+        Drug drugWithName = drugImpl.findDrug("metacin");
+
     }
 }

@@ -3,6 +3,7 @@ package com.vheal.service;
 import com.vheal.dao.DrugRepository;
 import com.vheal.entity.Drug;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -3,9 +3,11 @@ package com.vheal;
 import com.vheal.dao.DoctorRepository;
 import com.vheal.dao.DrugRepository;
 import com.vheal.dao.PatientRepository;
-import com.vheal.entity.Doctor;
-import com.vheal.entity.Drug;
-import com.vheal.entity.Patient;
+import com.vheal.dao.PrescriptionRepository;
+import com.vheal.entity.*;
+import com.vheal.service.CustomUserDetailsService;
+import com.vheal.service.PatientImpl;
+import com.vheal.service.PatientService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -27,6 +29,12 @@ public class PatientTests {
 
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
 
     @Test
     @Rollback(value = false)
@@ -88,5 +96,86 @@ public class PatientTests {
         boolean notExistAfterDelete = patientRepository.findById(id).isPresent();
         assertTrue(isExistBeforeDelete);
         assertFalse(notExistAfterDelete);
+    }
+
+    @Test
+    @Order(7)
+    public void testCreatePatientWithId(){
+        Patient patient = new Patient(100,"Viswa","9876543210","23","male","Chennai","Tamil nadu","India");
+        Patient savedPatient = patientRepository.save(patient);
+        assertNotNull(savedPatient);
+    }
+
+    @Test
+    @Order(8)
+    public void testCreatePatientWithGetterSetter(){
+        Patient patient = new Patient();
+        patient.setId(101);
+        patient.getId();
+        patient.setPatientName("Viswa");
+        patient.getPatientName();
+        patient.setPhoneNo("9876543210");
+        patient.getPhoneNo();
+        patient.setAge("23");
+        patient.getAge();
+        patient.setGender("male");
+        patient.getGender();
+        patient.setCity("Chennai");
+        patient.getCity();
+        patient.setState("Tamil nadu");
+        patient.getState();
+        patient.setCountry("India");
+        patient.getCountry();
+        Patient savedPatient = patientRepository.save(patient);
+        assertNotNull(savedPatient);
+    }
+
+    @Test
+    @Order(9)
+    public void testPatientsUserDoctorAndPrescriptions(){
+        Patient patient = new Patient();
+        User user = new User();
+        patient.setUser(user);
+        patient.getUser();
+        try {
+            patient.getDoctor();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        patient.setDoctors(doctorRepository.findAll());
+        patient.getDoctors();
+        try {
+            patient.getDoctor();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        patient.getPrescriptions();
+        Prescription prescription = null;
+        try {
+            prescription = prescriptionRepository.findByDate("02-05-2022");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        patient.addPrescription(prescription);
+        patient.setPrescriptions(prescriptionRepository.findAll());
+        patient.getPrescriptions();
+        patient.addPrescription(prescription);
+        try {
+            patient.deletePrescription(prescription);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @Order(10)
+    public void testPatientService() {
+        PatientService patientService = new PatientImpl(patientRepository);
+        patientService.findAll();
+        patientService.findById(1);
+        patientService.findById(100);
+        Patient patient = new Patient("Viswa","9876543210","23","male","Chennai","Tamil nadu","India");
+        patientService.save(patient);
+        patientService.deleteById(1);
     }
 }
