@@ -1,0 +1,60 @@
+
+Jcom.vheal.controller.LoginController#getPrincipal()Lcom/vheal/entity/User;h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaj j("3*Ç
+
+2h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javam m(/ý
+ú
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javam m(<?
+%39org.springframework.security.core.context.SecurityContext"‡org.springframework.security.core.context.SecurityContextHolder#getContext()Lorg/springframework/security/core/context/SecurityContext;*C"A
+?org.springframework.security.core.context.SecurityContextHolderþû
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javam m(P6
+%40org.springframework.security.core.Authentication"org.springframework.security.core.context.SecurityContext#getAuthentication()Lorg/springframework/security/core/Authentication;*A
+?
+%39org.springframework.security.core.context.SecurityContext2getAuthentication()¢Ÿ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javam m(_
+%5java.lang.Object"Qorg.springframework.security.core.Authentication#getPrincipal()Ljava/lang/Object;*8
+6
+%40org.springframework.security.core.Authentication2getPrincipal()¬
+©
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javam m(_
+usercom.vheal.entity.User"__id*
+
+%5java.lang.Object*
+1*¸
+
+3h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javak k(š
+—
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javak k(
+usercom.vheal.entity.User"__id*
+""ý
+ú
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javal l(-?
+%09org.springframework.security.core.context.SecurityContext"‡org.springframework.security.core.context.SecurityContextHolder#getContext()Lorg/springframework/security/core/context/SecurityContext;*C"A
+?org.springframework.security.core.context.SecurityContextHolderþû
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javal l(A6
+%10org.springframework.security.core.Authentication"org.springframework.security.core.context.SecurityContext#getAuthentication()Lorg/springframework/security/core/Authentication;*A
+?
+%09org.springframework.security.core.context.SecurityContext2getAuthentication()¢Ÿ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javal l(P
+%2java.lang.Object"Qorg.springframework.security.core.Authentication#getPrincipal()Ljava/lang/Object;*8
+6
+%10org.springframework.security.core.Authentication2getPrincipal()*
+2
+1*û
+1h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javao o("‹
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javao o(
+
+usercom.vheal.entity.UserB(&
+$com.vheal.controller.LoginController

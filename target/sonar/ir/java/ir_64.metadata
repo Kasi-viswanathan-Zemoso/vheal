@@ -1,0 +1,4 @@
+com.vheal.aspect.VhealAspect#instance-init#
+java.lang.Object#getClass()Ljava/lang/Class;
+java.util.logging.Logger#getLogger(Ljava/lang/String;)Ljava/util/logging/Logger;
+java.lang.Class#getName()Ljava/lang/String;

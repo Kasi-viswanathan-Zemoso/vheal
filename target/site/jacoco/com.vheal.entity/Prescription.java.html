@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Prescription.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.entity</a> &gt; <span class="el_source">Prescription.java</span></div><h1>Prescription.java</h1><pre class="source lang-java linenums">package com.vheal.entity;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+//create table &amp; sync to prescription entity in sql workbench
+@Entity
+@Table(name=&quot;prescription&quot;)
+public class Prescription {
+
+    // define fields for drug
+
+    // primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+    private int id;
+
+    @Column(name = &quot;suggestion&quot;)
+    private String suggestion;
+
+    @Column(name = &quot;date&quot;)
+    private String date;
+
+    // many to many relationship with drugs
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = &quot;prescription_drug&quot;,
+            joinColumns = @JoinColumn(name = &quot;prescription_id&quot;),
+            inverseJoinColumns = @JoinColumn(name = &quot;drug_id&quot;))
+    private List&lt;Drug&gt; drugs;
+
+
+    // define constructors
+<span class="fc" id="L37">    public Prescription(){}</span>
+
+<span class="fc" id="L39">    public Prescription(int id, String suggestion, String date) {</span>
+<span class="fc" id="L40">        this.id = id;</span>
+<span class="fc" id="L41">        this.suggestion = suggestion;</span>
+<span class="fc" id="L42">        this.date = date;</span>
+<span class="fc" id="L43">    }</span>
+
+<span class="fc" id="L45">    public Prescription(String suggestion, String date) {</span>
+<span class="fc" id="L46">        this.suggestion = suggestion;</span>
+<span class="fc" id="L47">        this.date = date;</span>
+<span class="fc" id="L48">    }</span>
+
+
+    // define getters/setters
+    public int getId() {
+<span class="fc" id="L53">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L57">        this.id = id;</span>
+<span class="fc" id="L58">    }</span>
+
+    public String getSuggestion() {
+<span class="fc" id="L61">        return suggestion;</span>
+    }
+
+    public void setSuggestion(String suggestion) {
+<span class="fc" id="L65">        this.suggestion = suggestion;</span>
+<span class="fc" id="L66">    }</span>
+
+    public String getDate() {
+<span class="fc" id="L69">        return date;</span>
+    }
+
+    public void setDate(String date) {
+<span class="fc" id="L73">        this.date = date;</span>
+<span class="fc" id="L74">    }</span>
+
+    public List&lt;Drug&gt; getDrugs() {
+<span class="fc" id="L77">        return drugs;</span>
+    }
+
+    public void setDrugs(List&lt;Drug&gt; drugs) {
+<span class="fc" id="L81">        this.drugs = drugs;</span>
+<span class="fc" id="L82">    }</span>
+
+    // add convenience method
+    public void addDrug(Drug theDrug){
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if(drugs == null){</span>
+<span class="fc" id="L87">            drugs = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L89">        drugs.add(theDrug);</span>
+<span class="fc" id="L90">    }</span>
+
+    public void deleteDrug(Drug theDrug) {
+<span class="fc" id="L93">        List&lt;Drug&gt; newDrugs = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (Drug tempDrug: drugs) {</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">            if(tempDrug.getId() != theDrug.getId()){</span>
+<span class="fc" id="L96">                newDrugs.add(tempDrug);</span>
+            }
+<span class="fc" id="L98">        }</span>
+<span class="fc" id="L99">        this.drugs = newDrugs;</span>
+<span class="fc" id="L100">    }</span>
+
+
+    // define toString
+    @Override
+    public String toString() {
+<span class="fc" id="L106">        return &quot;Prescription{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, suggestion='&quot; + suggestion + '\'' +
+                &quot;, date='&quot; + date + '\'' +
+                &quot;, drugs='&quot; + drugs + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

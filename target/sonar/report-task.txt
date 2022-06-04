@@ -1,0 +1,7 @@
+organization=kasi-viswanathan-zemoso
+projectKey=kasi-viswanathan-zemoso
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.29453
+dashboardUrl=https://sonarcloud.io/dashboard?id=kasi-viswanathan-zemoso
+ceTaskId=AYEu1nx1X23ym2L0xhgS
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYEu1nx1X23ym2L0xhgS

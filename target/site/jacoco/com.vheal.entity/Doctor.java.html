@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Doctor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.entity</a> &gt; <span class="el_source">Doctor.java</span></div><h1>Doctor.java</h1><pre class="source lang-java linenums">package com.vheal.entity;
+
+import org.hibernate.validator.constraints.Range;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
+
+//create table &amp; sync to doctor entity in sql workbench
+@Component
+@Entity
+@Table(name=&quot;doctor&quot;)
+public class Doctor {
+
+    // fields for patient
+
+    // primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+    private int id;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;doctor_name&quot;)
+    private String doctorName;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;phone_no&quot;)
+    private String phoneNo;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Range(min = 0, max = 150, message = &quot;enter valid age&quot;)
+    @Column(name = &quot;age&quot;)
+    private String age;
+
+    @NotBlank(message = &quot;choose your gender&quot;)
+    @Column(name = &quot;gender&quot;)
+    private String gender;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;specialization&quot;)
+    private String specialization;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;degree&quot;)
+    private String degree;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;city&quot;)
+    private String city;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;state&quot;)
+    private String state;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;country&quot;)
+    private String country;
+
+
+    // One to One Mapping with User entity
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = &quot;user_id&quot;)
+    private User user;
+
+    // many to many relationship with patients
+    @ManyToMany(fetch=FetchType.LAZY,
+            cascade= {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = &quot;doctor_patient&quot;,
+            joinColumns = @JoinColumn(name = &quot;doctor_id&quot;),
+            inverseJoinColumns = @JoinColumn(name = &quot;patient_id&quot;))
+    private List&lt;Patient&gt; patients;
+
+
+    // constructors
+<span class="fc" id="L81">    public Doctor(){}</span>
+
+    public Doctor(String doctorName, String phoneNo, String age, String gender,
+                  String specialization, String degree,
+<span class="fc" id="L85">                  String city, String state, String country) {</span>
+<span class="fc" id="L86">        this.doctorName = doctorName;</span>
+<span class="fc" id="L87">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L88">        this.age = age;</span>
+<span class="fc" id="L89">        this.gender = gender;</span>
+<span class="fc" id="L90">        this.specialization = specialization;</span>
+<span class="fc" id="L91">        this.degree = degree;</span>
+<span class="fc" id="L92">        this.city = city;</span>
+<span class="fc" id="L93">        this.state = state;</span>
+<span class="fc" id="L94">        this.country = country;</span>
+<span class="fc" id="L95">    }</span>
+
+    public Doctor(int id, String doctorName, String phoneNo, String age, String gender,
+                  String specialization, String degree,
+<span class="fc" id="L99">                  String city, String state, String country) {</span>
+<span class="fc" id="L100">        this.id = id;</span>
+<span class="fc" id="L101">        this.doctorName = doctorName;</span>
+<span class="fc" id="L102">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L103">        this.age = age;</span>
+<span class="fc" id="L104">        this.gender = gender;</span>
+<span class="fc" id="L105">        this.specialization = specialization;</span>
+<span class="fc" id="L106">        this.degree = degree;</span>
+<span class="fc" id="L107">        this.city = city;</span>
+<span class="fc" id="L108">        this.state = state;</span>
+<span class="fc" id="L109">        this.country = country;</span>
+<span class="fc" id="L110">    }</span>
+
+    // getters/setters
+    public int getId() {
+<span class="fc" id="L114">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L118">        this.id = id;</span>
+<span class="fc" id="L119">    }</span>
+
+    public String getDoctorName() {
+<span class="fc" id="L122">        return doctorName;</span>
+    }
+
+    public void setDoctorName(String doctorName) {
+<span class="fc" id="L126">        this.doctorName = doctorName;</span>
+<span class="fc" id="L127">    }</span>
+
+    public String getPhoneNo() {
+<span class="fc" id="L130">        return phoneNo;</span>
+    }
+
+    public void setPhoneNo(String phoneNo) {
+<span class="fc" id="L134">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L135">    }</span>
+
+    public String getAge() {
+<span class="fc" id="L138">        return age;</span>
+    }
+
+    public void setAge(String age) {
+<span class="fc" id="L142">        this.age = age;</span>
+<span class="fc" id="L143">    }</span>
+
+    public String getGender() {
+<span class="fc" id="L146">        return gender;</span>
+    }
+
+    public void setGender(String gender) {
+<span class="fc" id="L150">        this.gender = gender;</span>
+<span class="fc" id="L151">    }</span>
+
+    public String getSpecialization() {
+<span class="fc" id="L154">        return specialization;</span>
+    }
+
+    public void setSpecialization(String specialization) {
+<span class="fc" id="L158">        this.specialization = specialization;</span>
+<span class="fc" id="L159">    }</span>
+
+    public String getDegree() {
+<span class="fc" id="L162">        return degree;</span>
+    }
+
+    public void setDegree(String degree) {
+<span class="fc" id="L166">        this.degree = degree;</span>
+<span class="fc" id="L167">    }</span>
+
+    public String getCity() {
+<span class="fc" id="L170">        return city;</span>
+    }
+
+    public void setCity(String city) {
+<span class="fc" id="L174">        this.city = city;</span>
+<span class="fc" id="L175">    }</span>
+
+    public String getState() {
+<span class="fc" id="L178">        return state;</span>
+    }
+
+    public void setState(String state) {
+<span class="fc" id="L182">        this.state = state;</span>
+<span class="fc" id="L183">    }</span>
+
+    public String getCountry() {
+<span class="fc" id="L186">        return country;</span>
+    }
+
+    public void setCountry(String country) {
+<span class="fc" id="L190">        this.country = country;</span>
+<span class="fc" id="L191">    }</span>
+
+    public List&lt;Patient&gt; getPatients() {
+<span class="fc" id="L194">        return patients;</span>
+    }
+
+    public void setPatients(List&lt;Patient&gt; patients) {
+<span class="fc" id="L198">        this.patients = patients;</span>
+<span class="fc" id="L199">    }</span>
+
+    public User getUser() {
+<span class="fc" id="L202">        return user;</span>
+    }
+
+    public void setUser(User user) {
+<span class="fc" id="L206">        this.user = user;</span>
+<span class="fc" id="L207">    }</span>
+
+
+    // convenience methods
+    public void addPatient(Patient thePatient){
+<span class="fc bfc" id="L212" title="All 2 branches covered.">        if(patients == null){</span>
+<span class="fc" id="L213">            patients = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L215">        patients.add(thePatient);</span>
+<span class="fc" id="L216">    }</span>
+
+    public void deletePatient(Patient thePatient) {
+<span class="fc" id="L219">        List&lt;Patient&gt; newPatients = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        for (Patient tempPatient : patients) {</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">            if(tempPatient.getId() != thePatient.getId()){</span>
+<span class="fc" id="L222">                newPatients.add(tempPatient);</span>
+            }
+<span class="fc" id="L224">        }</span>
+<span class="fc" id="L225">        this.patients = newPatients;</span>
+<span class="fc" id="L226">    }</span>
+
+
+    // toString
+    @Override
+    public String toString() {
+<span class="fc" id="L232">        return &quot;Doctor{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, doctorName='&quot; + doctorName + '\'' +
+                &quot;, phoneNo='&quot; + phoneNo + '\'' +
+                &quot;, age='&quot; + age + '\'' +
+                &quot;, gender='&quot; + gender + '\'' +
+                &quot;, specialization='&quot; + specialization + '\'' +
+                &quot;, degree='&quot; + degree + '\'' +
+                &quot;, city='&quot; + city + '\'' +
+                &quot;, state='&quot; + state + '\'' +
+                &quot;, country='&quot; + country + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,8 @@
+com.vheal.controller.LoginController#processRegister(Lcom/vheal/entity/Role;Lcom/vheal/entity/User;Lorg/springframework/validation/BindingResult;Lorg/springframework/ui/Model;)Ljava/lang/String;
+org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder#instance-init#
+com.vheal.entity.Doctor#<init>()V
+com.vheal.entity.Doctor#instance-init#
+com.vheal.entity.Patient#<init>()V
+java.lang.String#contains(Ljava/lang/CharSequence;)Z
+org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder#<init>()V
+com.vheal.entity.Patient#instance-init#

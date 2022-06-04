@@ -1,0 +1,482 @@
+
+¬com.vheal.controller.LoginController#processRegister(Lcom/vheal/entity/Role;Lcom/vheal/entity/User;Lorg/springframework/validation/BindingResult;Lorg/springframework/ui/Model;)Ljava/lang/String;h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java= =(!"startingBlock*¥
+2h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaW! W(.®•
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaW% W(,
+%24com.vheal.entity.Patient"com.vheal.entity.Patientª
+∏
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaW! W(.
+%25""com.vheal.entity.Patient#<init>()V*!
+
+%24com.vheal.entity.Patientæ
+ª
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaW W(/&
+
+thePatientcom.vheal.entity.Patient"__id*!
+
+%24com.vheal.entity.Patient£†
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaY Y($
+%26void":com.vheal.entity.Patient#setUser(Lcom/vheal/entity/User;)V*(
+&
+
+thePatientcom.vheal.entity.Patient*
+
+usercom.vheal.entity.User2 setUser(Lcom/vheal/entity/User;)ˇ
+¸
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaZ Z(8#
+%27org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*	
+patient*(
+&
+
+thePatientcom.vheal.entity.PatientÍ
+Á
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java[ [(*
+%28"template!patients/patient-form*("&
+$com.vheal.controller.LoginController**
+(
+theModelorg.springframework.ui.Model"Ö
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java[ [(+
+patients/patient-form*‚
+3h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaU U(ËÂ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaU U(
+%22java.lang.String"1com.vheal.entity.Role#getName()Ljava/lang/String;*"
+ 
+theRolecom.vheal.entity.Role2	getName()ˇ¸
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaU U(0
+%23boolean"4java.lang.String#contains(Ljava/lang/CharSequence;)Z*
+
+%22java.lang.String*	
+PATIENT2"contains(Ljava/lang/CharSequence;)*
+2
+1*›"
+startingBlocki
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=! =(õT
+R
+
+__unknown_file (
+%30"__id*)*'
+
+rolecom.vheal.entity.Role"
+nameU
+S
+
+__unknown_file (
+%31"__id***(
+
+rolecom.vheal.entity.Role"
+users≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=" =(9
+%32"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%31Æ
+´
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=? =(C(
+
+rolecom.vheal.entity.Role"
+users"__annotation*
+
+%32≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=" =(9
+%33"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%30≠
+™
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=? =(C'
+
+rolecom.vheal.entity.Role"
+name"__annotation*
+
+%33V
+T
+
+__unknown_file (
+%34"__id*+*)
+
+usercom.vheal.entity.User"
+doctorU
+S
+
+__unknown_file (
+%35"__id***(
+
+usercom.vheal.entity.User"
+emailX
+V
+
+__unknown_file (
+%36"__id*-*+
+
+usercom.vheal.entity.User"
+
+passwordW
+U
+
+__unknown_file (
+%37"__id*,**
+
+usercom.vheal.entity.User"	
+patientU
+S
+
+__unknown_file (
+%38"__id***(
+
+usercom.vheal.entity.User"
+roles≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=E =(\
+%39"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%37•
+¢
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=] =(c
+%40"
+__annotate*
+javax.validation.Valid*
+
+%37π
+∂
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=i =(m*
+
+usercom.vheal.entity.User"	
+patient"__annotation*
+
+%39*
+
+%40≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=E =(\
+%41"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%34•
+¢
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=] =(c
+%42"
+__annotate*
+javax.validation.Valid*
+
+%34∏
+µ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=i =(m)
+
+usercom.vheal.entity.User"
+doctor"__annotation*
+
+%41*
+
+%42≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=E =(\
+%43"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%35•
+¢
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=] =(c
+%44"
+__annotate*
+javax.validation.Valid*
+
+%35∑
+¥
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=i =(m(
+
+usercom.vheal.entity.User"
+email"__annotation*
+
+%43*
+
+%44≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=E =(\
+%45"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%38•
+¢
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=] =(c
+%46"
+__annotate*
+javax.validation.Valid*
+
+%38∑
+¥
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=i =(m(
+
+usercom.vheal.entity.User"
+roles"__annotation*
+
+%45*
+
+%46≈
+¬
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=E =(\
+%47"
+__annotate*:8
+6org.springframework.web.bind.annotation.ModelAttribute*
+
+%36•
+¢
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=] =(c
+%48"
+__annotate*
+javax.validation.Valid*
+
+%36∫
+∑
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=i =(m+
+
+usercom.vheal.entity.User"
+
+password"__annotation*
+
+%47*
+
+%48¨©
+j
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java=å =(ö(
+theModelorg.springframework.ui.Model"java.util.HashMap*
+7*£
+4h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaM M(+¶£
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaM# M()
+%17com.vheal.entity.Doctor"com.vheal.entity.Doctorπ
+∂
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaM M(+
+%18"!com.vheal.entity.Doctor#<init>()V* 
+
+%17com.vheal.entity.Doctorª
+∏
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaM M(,$
+	theDoctorcom.vheal.entity.Doctor"__id* 
+
+%17com.vheal.entity.Doctor†ù
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaO O(#
+%19void"9com.vheal.entity.Doctor#setUser(Lcom/vheal/entity/User;)V*&
+$
+	theDoctorcom.vheal.entity.Doctor*
+
+usercom.vheal.entity.User2 setUser(Lcom/vheal/entity/User;)¸
+˘
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaP P(6#
+%20org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*
+
+doctor*&
+$
+	theDoctorcom.vheal.entity.DoctorË
+Â
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaQ Q((
+%21"template!doctors/doctor-form*("&
+$com.vheal.controller.LoginController**
+(
+theModelorg.springframework.ui.Model"É
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaQ Q()
+doctors/doctor-form*„%
+5h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaC0 C(K˜Ù
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaC4 C(IF
+%2@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoderâ
+Ü
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaC0 C(K
+%3"Jorg.springframework.security.crypto.bcrypt.BCryptPasswordEncoder#<init>()V*H
+F
+%2@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoderí
+è
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaC C(LS
+passwordEncoder@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"__id*H
+F
+%2@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoderÏÈ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaD8 D(J
+%4java.lang.String"5com.vheal.entity.User#getPassword()Ljava/lang/String;*
+
+usercom.vheal.entity.User2getPassword()çä
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaD! D(K
+%5java.lang.String"sorg.springframework.security.crypto.bcrypt.BCryptPasswordEncoder#encode(Ljava/lang/CharSequence;)Ljava/lang/String;*U
+S
+passwordEncoder@org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder*
+
+%4java.lang.String2 encode(Ljava/lang/CharSequence;)≤
+Ø
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaD D(L#
+encodedPasswordjava.lang.String"__id*
+
+%5java.lang.Stringöó
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaE E()
+
+%6void"6com.vheal.entity.User#setPassword(Ljava/lang/String;)V*
+
+usercom.vheal.entity.User*%
+#
+encodedPasswordjava.lang.String2setPassword(Ljava/lang/String;)œ
+Ã
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaF F("
+%7com.vheal.dao.UserRepository"__id*6*4&
+$com.vheal.controller.LoginController"
+
+userRepo «
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaF F(
+%8com.vheal.entity.User"]org.springframework.data.repository.CrudRepository#save(Ljava/lang/Object;)Ljava/lang/Object;*$
+"
+%7com.vheal.dao.UserRepository*
+
+usercom.vheal.entity.User2save(Ljava/lang/Object;)œ
+Ã
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaG G("
+%9com.vheal.dao.RoleRepository"__id*6*4&
+$com.vheal.controller.LoginController"
+
+roleRepoÂ‚
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaG+ G(9
+%10java.lang.String"1com.vheal.entity.Role#getName()Ljava/lang/String;*
+
+rolecom.vheal.entity.Role2	getName()¿Ω
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaG G(:
+%11com.vheal.entity.Role"Rcom.vheal.dao.RoleRepository#findByName(Ljava/lang/String;)Lcom/vheal/entity/Role;*$
+"
+%9com.vheal.dao.RoleRepository*
+
+%10java.lang.String2findByName(Ljava/lang/String;)µ
+≤
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaG G(; 
+theRolecom.vheal.entity.Role"__id*
+
+%11com.vheal.entity.Roleöó
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaH H(
+%12void"7com.vheal.entity.User#addRole(Lcom/vheal/entity/Role;)V*
+
+usercom.vheal.entity.User*"
+ 
+theRolecom.vheal.entity.Role2 addRole(Lcom/vheal/entity/Role;)–
+Õ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaI I(#
+%13com.vheal.dao.RoleRepository"__id*6*4&
+$com.vheal.controller.LoginController"
+
+roleRepoœÃ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaI I(
+%14com.vheal.entity.Role"]org.springframework.data.repository.CrudRepository#save(Ljava/lang/Object;)Ljava/lang/Object;*%
+#
+%13com.vheal.dao.RoleRepository*"
+ 
+theRolecom.vheal.entity.Role2save(Ljava/lang/Object;)ËÂ
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaK K(
+%15java.lang.String"1com.vheal.entity.Role#getName()Ljava/lang/String;*"
+ 
+theRolecom.vheal.entity.Role2	getName()˛˚
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaK K(/
+%16boolean"4java.lang.String#contains(Ljava/lang/CharSequence;)Z*
+
+%15java.lang.String*
+
+DOCTOR2"contains(Ljava/lang/CharSequence;)*
+3
+4*Ã
+6h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaA A( ﬂ
+‹
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaA A( 
+%1"template!signup_form*("&
+$com.vheal.controller.LoginController**
+(
+theModelorg.springframework.ui.Model"{
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javaA A(!
+signup_form*ˆ
+7h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java@ @(˛˚
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java@ @($
+%0boolean"2org.springframework.validation.Errors#hasErrors()Z*?
+=
+bindingResult,org.springframework.validation.BindingResult2hasErrors()*
+5
+6*Õ
+1h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java^ ^(‡
+›
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java^ ^(
+%29"template!signup_form*("&
+$com.vheal.controller.LoginController**
+(
+theModelorg.springframework.ui.Model"{
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java^ ^(
+signup_form:
+rolecom.vheal.entity.Role:
+usercom.vheal.entity.User:=
+bindingResult,org.springframework.validation.BindingResult:(
+theModelorg.springframework.ui.ModelB(&
+$com.vheal.controller.LoginController

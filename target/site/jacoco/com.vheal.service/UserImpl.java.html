@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.service</a> &gt; <span class="el_source">UserImpl.java</span></div><h1>UserImpl.java</h1><pre class="source lang-java linenums">package com.vheal.service;
+
+import com.vheal.dao.UserRepository;
+import com.vheal.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+// Implementation for Drug service
+@Service
+public class UserImpl implements UserService{
+
+    private UserRepository userRepository;
+
+    // constructor dependency injection
+    @Autowired
+<span class="fc" id="L19">    public UserImpl(UserRepository theUserRepository){</span>
+<span class="fc" id="L20">        userRepository = theUserRepository;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public List&lt;User&gt; findAll() {
+<span class="fc" id="L25">        return userRepository.findAll();</span>
+    }
+
+    @Override
+    public User findById(int theId) {
+<span class="fc" id="L30">        Optional&lt;User&gt; result = userRepository.findById(theId);</span>
+
+<span class="fc" id="L32">        User theUser = null;</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (result.isPresent()) {</span>
+<span class="fc" id="L35">            theUser = result.get();</span>
+        }
+        else {
+            // we didn't find the drug return null
+<span class="fc" id="L39">            return theUser;</span>
+        }
+<span class="fc" id="L41">        return theUser;</span>
+    }
+
+    @Override
+    public void save(User theUser) {
+<span class="fc" id="L46">        userRepository.save(theUser);</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public void deleteById(int theId) {
+<span class="fc" id="L51">        userRepository.deleteById(theId);</span>
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public User findByEmail(String theEmail) {
+<span class="fc" id="L56">        return userRepository.findByEmail(theEmail);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

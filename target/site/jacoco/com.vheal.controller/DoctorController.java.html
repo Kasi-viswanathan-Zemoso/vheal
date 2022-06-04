@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.controller</a> &gt; <span class="el_source">DoctorController.java</span></div><h1>DoctorController.java</h1><pre class="source lang-java linenums">package com.vheal.controller;
+
+
+import com.vheal.entity.Doctor;
+import com.vheal.entity.Drug;
+import com.vheal.entity.Patient;
+import com.vheal.entity.Prescription;
+import com.vheal.service.DoctorService;
+import com.vheal.service.DrugService;
+import com.vheal.service.PatientService;
+import com.vheal.service.PrescriptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+//Controller for Doctor pages
+@Component
+@Controller
+@RequestMapping(&quot;/doctors&quot;)
+public class DoctorController {
+
+    private DoctorService doctorService;
+    private PatientService patientService;
+    private PrescriptionService prescriptionService;
+    private DrugService drugService;
+
+    //    constructor injection of service
+    @Autowired
+    public DoctorController(DoctorService theDoctorService, PatientService thePatientService,
+<span class="fc" id="L40">                            PrescriptionService thePrescriptionService, DrugService theDrugService) {</span>
+<span class="fc" id="L41">        this.doctorService = theDoctorService;</span>
+<span class="fc" id="L42">        this.patientService = thePatientService;</span>
+<span class="fc" id="L43">        this.prescriptionService = thePrescriptionService;</span>
+<span class="fc" id="L44">        this.drugService = theDrugService;</span>
+<span class="fc" id="L45">    }</span>
+
+    // mapping to save Doctor details
+    @PostMapping(&quot;/saveDoctor&quot;)
+    public String saveDoctor(@ModelAttribute(&quot;doctor&quot;) @Valid Doctor theDoctor, BindingResult bindingResult, Model theModel){
+
+        // handle errors
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(bindingResult.hasErrors()){</span>
+<span class="nc" id="L53">            return &quot;doctors/doctor-form&quot;;</span>
+        }else {
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if(doctorService.findById(theDoctor.getId()) != null){</span>
+<span class="nc" id="L57">                doctorService.save(theDoctor);</span>
+<span class="nc" id="L58">                System.out.println(theDoctor.getPatients());</span>
+<span class="nc" id="L59">                theModel.addAttribute(&quot;doctor&quot;,theDoctor);</span>
+<span class="nc" id="L60">                theModel.addAttribute(&quot;doctorPatients&quot;, theDoctor.getPatients());</span>
+<span class="nc" id="L61">                return &quot;doctors/doctor-page&quot;;</span>
+            }
+            // save new Doctor
+<span class="nc" id="L64">            doctorService.save(theDoctor);</span>
+
+            // redirect to success
+<span class="nc" id="L67">            return &quot;register_success&quot;;</span>
+        }
+    }
+
+    // mapping to modify Doctor details
+    @GetMapping(&quot;/showFormForUpdateDoctor&quot;)
+    public String showFormForUpdateDoctor(@RequestParam(&quot;doctorId&quot;) int theId, Model theModel){
+
+        // get Doctor from service
+<span class="nc" id="L76">        Doctor theDoctor = doctorService.findById(theId);</span>
+
+        // set doctor as model attribute to pre-populate form
+<span class="nc" id="L79">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+
+<span class="nc" id="L81">        return &quot;doctors/doctor-form&quot;;</span>
+    }
+
+    @GetMapping(&quot;/doctors/showFormForUpdateDoctor&quot;)
+    public String showFormForUpdateDoctors(@RequestParam(&quot;doctorId&quot;) int theId, Model theModel){
+
+        // get Doctor from service
+<span class="nc" id="L88">        Doctor theDoctor = doctorService.findById(theId);</span>
+
+        // set doctor as model attribute to pre-populate form
+<span class="nc" id="L91">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+
+<span class="nc" id="L93">        return &quot;doctors/doctor-form&quot;;</span>
+    }
+
+    // mapping to display Doctor's UI page
+    @GetMapping(&quot;/showDoctor&quot;)
+    public String showDoctor( @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+<span class="nc" id="L99">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="nc" id="L100">        theModel.addAttribute(&quot;doctorPatients&quot;, theDoctor.getPatients());</span>
+<span class="nc" id="L101">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="nc" id="L102">        return &quot;doctors/doctor-page&quot;;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

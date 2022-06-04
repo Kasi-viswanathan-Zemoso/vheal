@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VhealAspect.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.aspect</a> &gt; <span class="el_source">VhealAspect.java</span></div><h1>VhealAspect.java</h1><pre class="source lang-java linenums">package com.vheal.aspect;
+
+import com.vheal.entity.Doctor;
+import com.vheal.entity.Role;
+import com.vheal.entity.User;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+@Aspect
+@Component
+<span class="fc" id="L19">public class VhealAspect {</span>
+
+<span class="fc" id="L21">    private Logger myLogger = Logger.getLogger(getClass().getName());</span>
+
+    @Before(&quot;execution(public String processRegister(..))&quot;)
+    public void userAndRole(JoinPoint theJoinPoint){
+
+<span class="nc" id="L26">        MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();</span>
+
+<span class="nc" id="L28">        myLogger.info(&quot;Method: &quot; + methodSig);</span>
+<span class="nc" id="L29">        myLogger.info(&quot;\n=====&gt;&gt;&gt; New User Registered&quot;);</span>
+
+        // display method arguments
+
+        // get args
+<span class="nc" id="L34">        Object[] args = theJoinPoint.getArgs();</span>
+
+        // loop thru args
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (Object tempArg : args) {</span>
+//            myLogger.info(tempArg.toString());
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (tempArg instanceof User) {</span>
+
+                // downcast and print User specific stuff
+<span class="nc" id="L43">                User theUser = (User) tempArg;</span>
+
+<span class="nc" id="L45">                myLogger.info(&quot;\n=====&gt;&gt;&gt; User Email= &quot; + theUser.getEmail());</span>
+<span class="nc" id="L46">                myLogger.info(&quot;\n=====&gt;&gt;&gt; User Password= &quot; + theUser.getPassword());</span>
+<span class="nc" id="L47">                myLogger.info(&quot;\n=====&gt;&gt;&gt; User &quot; + args[0]);</span>
+
+            }
+        }
+
+<span class="nc" id="L52">    }</span>
+
+    // Detect Login
+    @After(&quot;execution(* com.vheal.controller.LoginController.processLogin(..))&quot;)
+    public void loginDetector(JoinPoint theJoinPoint) {
+
+<span class="nc" id="L58">        myLogger.info(&quot;\n=====&gt;&gt;&gt; New Login Detected&quot;);</span>
+
+<span class="nc" id="L60">    }</span>
+
+    // Log after Doctor details are saved
+    @AfterReturning(
+            pointcut=&quot;execution(* com.vheal.controller.DoctorController.saveDoctor(..))&quot;,
+            returning=&quot;result&quot;)
+    public void savedDoctorDetails(
+            JoinPoint theJoinPoint, String result) {
+        // get args
+<span class="nc" id="L69">        Object[] args = theJoinPoint.getArgs();</span>
+
+<span class="nc" id="L71">        myLogger.info(&quot;\n=====&gt;&gt;&gt;&quot; + args[0]);</span>
+<span class="nc" id="L72">        myLogger.info(&quot;\n=====&gt;&gt;&gt; Saved Doctor Details &quot;);</span>
+
+<span class="nc" id="L74">    }</span>
+
+    // Log after Patient details are saved
+    @AfterReturning(
+            pointcut=&quot;execution(* com.vheal.controller.PatientController.savePatient(..))&quot;,
+            returning=&quot;result&quot;)
+    public void savedPatientDetails(
+            JoinPoint theJoinPoint, String result) {
+        // get args
+<span class="fc" id="L83">        Object[] args = theJoinPoint.getArgs();</span>
+
+<span class="fc" id="L85">        myLogger.info(&quot;\n=====&gt;&gt;&gt;&quot; + args[0]);</span>
+<span class="fc" id="L86">        myLogger.info(&quot;\n=====&gt;&gt;&gt; Saved Patient Details &quot;);</span>
+
+<span class="fc" id="L88">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

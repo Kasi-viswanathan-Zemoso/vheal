@@ -1,0 +1,47 @@
+
+dcom.vheal.controller.DrugController#showFormForAdd(Lorg/springframework/ui/Model;)Ljava/lang/String;g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java. .( "startingBlock*©
+startingBlockg
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java.  .(0©¶
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java.! .(/(
+theModelorg.springframework.ui.Model"java.util.HashMap*
+1*’	
+1g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java1 1(!†ù
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java1 1(
+%0com.vheal.entity.Drug"com.vheal.entity.Drug≤
+Ø
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java1 1(!
+%1"com.vheal.entity.Drug#<init>()V*
+
+%0com.vheal.entity.Drug≥
+∞
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java1 1(" 
+theDrugcom.vheal.entity.Drug"__id*
+
+%0com.vheal.entity.DrugÙ
+Ò
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java4 4(."
+%2org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*
+drug*"
+ 
+theDrugcom.vheal.entity.Drug·
+ﬁ
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java6 6( 
+%3"template!drugs/drug-form*'"%
+#com.vheal.controller.DrugController**
+(
+theModelorg.springframework.ui.Model"~
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java6 6(!
+drugs/drug-form:(
+theModelorg.springframework.ui.ModelB'%
+#com.vheal.controller.DrugController

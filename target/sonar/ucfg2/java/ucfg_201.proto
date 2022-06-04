@@ -1,0 +1,29 @@
+
+>com.vheal.controller.LoginController#login()Ljava/lang/String;h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javab b("3*ë
+2h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javae e(!"|
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javae e("
+processLogin*¬
+3h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javac c( €
+ý
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javac c("
+%0com.vheal.entity.User"Jcom.vheal.controller.LoginController#getPrincipal()Lcom/vheal/entity/User;*(&
+$com.vheal.controller.LoginController±
+®
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javac c(#
+usercom.vheal.entity.User"__id*
+
+%0com.vheal.entity.User*
+2
+1*ä
+1h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javag g("u
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.javag g(	
+loginB(&
+$com.vheal.controller.LoginController

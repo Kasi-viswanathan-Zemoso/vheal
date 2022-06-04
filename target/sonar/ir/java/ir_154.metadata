@@ -1,0 +1,3 @@
+com.vheal.controller.DoctorPrescriptionController#showFormForAddPrescription(IILorg/springframework/ui/Model;)Ljava/lang/String;
+com.vheal.entity.Prescription#<init>()V
+com.vheal.entity.Prescription#instance-init#

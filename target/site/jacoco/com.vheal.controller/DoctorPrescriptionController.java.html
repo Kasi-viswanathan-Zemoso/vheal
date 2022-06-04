@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorPrescriptionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.controller</a> &gt; <span class="el_source">DoctorPrescriptionController.java</span></div><h1>DoctorPrescriptionController.java</h1><pre class="source lang-java linenums">package com.vheal.controller;
+
+import com.vheal.entity.Doctor;
+import com.vheal.entity.Patient;
+import com.vheal.entity.Prescription;
+import com.vheal.service.DoctorService;
+import com.vheal.service.DrugService;
+import com.vheal.service.PatientService;
+import com.vheal.service.PrescriptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+//Controller for Doctor and Prescription relations
+@Controller
+@RequestMapping(&quot;/doctors&quot;)
+public class DoctorPrescriptionController {
+
+    private DoctorService doctorService;
+    private PatientService patientService;
+    private PrescriptionService prescriptionService;
+    private DrugService drugService;
+
+    //    constructor injection of service
+    @Autowired
+    public DoctorPrescriptionController(DoctorService theDoctorService, PatientService thePatientService,
+<span class="fc" id="L33">                            PrescriptionService thePrescriptionService, DrugService theDrugService) {</span>
+<span class="fc" id="L34">        this.doctorService = theDoctorService;</span>
+<span class="fc" id="L35">        this.patientService = thePatientService;</span>
+<span class="fc" id="L36">        this.prescriptionService = thePrescriptionService;</span>
+<span class="fc" id="L37">        this.drugService = theDrugService;</span>
+<span class="fc" id="L38">    }</span>
+
+    // mapping to add new Prescription
+    @GetMapping(&quot;/showFormForAddPrescription&quot;)
+    public String showFormForAddPrescription(@RequestParam(&quot;patientId&quot;) int thePatientId, @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+        // create new Prescription
+<span class="fc" id="L44">        Prescription thePrescription = new Prescription();</span>
+<span class="fc" id="L45">        prescriptionService.save(thePrescription);</span>
+<span class="fc" id="L46">        theModel.addAttribute(&quot;prescription&quot;, thePrescription);</span>
+
+<span class="fc" id="L48">        Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="fc" id="L49">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="fc" id="L50">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+<span class="fc" id="L51">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="fc" id="L52">        return &quot;prescriptions/prescription-form&quot;;</span>
+    }
+
+    // mapping to delete patient's prescription
+    @GetMapping(&quot;/deletePrescription&quot;)
+    public String deletePrescription(@RequestParam(&quot;patientId&quot;) int thePatientId, @RequestParam(&quot;prescriptionId&quot;) int thePrescriptionId, @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+
+        // delete prescription and update patient
+<span class="nc" id="L60">        Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="nc" id="L61">        prescriptionService.deleteById(thePrescriptionId);</span>
+<span class="nc" id="L62">        patientService.save(thePatient);</span>
+        // redirect to prevent duplicate submissions
+<span class="nc" id="L64">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="nc" id="L65">        theModel.addAttribute(&quot;doctor&quot;,theDoctor);</span>
+<span class="nc" id="L66">        theModel.addAttribute(&quot;patient&quot;,thePatient);</span>
+<span class="nc" id="L67">        theModel.addAttribute(&quot;patientPrescriptions&quot;,thePatient.getPrescriptions());</span>
+<span class="nc" id="L68">        return &quot;patients/patient-page&quot;;</span>
+    }
+
+    // mapping to save new or updated Prescription
+    @PostMapping(&quot;/suggestion&quot;)
+    public String suggestion(@RequestParam(&quot;patientId&quot;) int thePatientId, @RequestParam(&quot;doctorId&quot;) int theDoctorId,
+                             @ModelAttribute(&quot;prescription&quot;) Prescription thePrescription,
+                             BindingResult bindingResult, Model theModel) {
+        //        handle errors
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (bindingResult.hasErrors()) {</span>
+<span class="nc" id="L78">            return &quot;prescriptions/prescription-form&quot;;</span>
+        } else {
+            // doctor and patient model to form
+<span class="nc" id="L81">            Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="nc" id="L82">            Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="nc" id="L83">            theModel.addAttribute(&quot;patient&quot;,thePatient);</span>
+<span class="nc" id="L84">            theModel.addAttribute(&quot;doctor&quot;,theDoctor);</span>
+
+            //set current date
+<span class="nc" id="L87">            LocalDateTime ldt = LocalDateTime.now();</span>
+<span class="nc" id="L88">            thePrescription.setDate(DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy&quot;, Locale.ENGLISH).format(ldt));</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if(thePrescription.getDrugs().isEmpty() == false){</span>
+<span class="nc" id="L90">                thePrescription.setDrugs(thePrescription.getDrugs());</span>
+<span class="nc" id="L91">                thePrescription.setSuggestion(thePrescription.getSuggestion());</span>
+                // save prescription
+<span class="nc" id="L93">                prescriptionService.save(thePrescription);</span>
+            }else {
+                // add prescription to patient
+<span class="nc" id="L96">                thePatient.addPrescription(thePrescription);</span>
+                // save prescription and patient
+<span class="nc" id="L98">                patientService.save(thePatient);</span>
+<span class="nc" id="L99">                prescriptionService.save(thePrescription);</span>
+            }
+<span class="nc" id="L101">            theModel.addAttribute(&quot;prescription&quot;, thePrescription);</span>
+<span class="nc" id="L102">            theModel.addAttribute(&quot;prescribedDrugs&quot;,thePrescription.getDrugs());</span>
+            // redirect to prevent duplicate submissions
+<span class="nc" id="L104">            return &quot;prescriptions/prescription-form&quot;;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

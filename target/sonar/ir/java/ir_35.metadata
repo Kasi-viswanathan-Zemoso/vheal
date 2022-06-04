@@ -1,0 +1,5 @@
+com.vheal.entity.CustomUserDetails#getAuthorities()Ljava/util/Collection;
+java.util.ArrayList#<init>()V
+org.springframework.security.core.authority.SimpleGrantedAuthority#<init>(Ljava/lang/String;)V
+org.springframework.security.core.authority.SimpleGrantedAuthority#instance-init#
+java.util.ArrayList#instance-init#

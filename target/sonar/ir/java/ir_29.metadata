@@ -1,0 +1,3 @@
+com.vheal.entity.Patient#addPrescription(Lcom/vheal/entity/Prescription;)V
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#

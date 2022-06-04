@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.vheal.HttpRequestTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.977 s <<< FAILURE! - in com.vheal.HttpRequestTest
+greetingShouldReturnDefaultMessage  Time elapsed: 0.036 s  <<< ERROR!
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080/login": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+	at com.vheal.HttpRequestTest.greetingShouldReturnDefaultMessage(HttpRequestTest.java:25)
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at com.vheal.HttpRequestTest.greetingShouldReturnDefaultMessage(HttpRequestTest.java:25)
+

@@ -1,0 +1,4 @@
+com.vheal.controller.DoctorPrescriptionController#suggestion(IILcom/vheal/entity/Prescription;Lorg/springframework/validation/BindingResult;Lorg/springframework/ui/Model;)Ljava/lang/String;
+java.time.format.DateTimeFormatter#ofPattern(Ljava/lang/String;Ljava/util/Locale;)Ljava/time/format/DateTimeFormatter;
+java.time.format.DateTimeFormatter#format(Ljava/time/temporal/TemporalAccessor;)Ljava/lang/String;
+java.time.LocalDateTime#now()Ljava/time/LocalDateTime;

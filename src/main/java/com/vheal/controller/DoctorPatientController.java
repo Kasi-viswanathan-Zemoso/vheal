@@ -116,27 +116,15 @@ public class DoctorPatientController {
         Doctor theDoctor = doctorService.findById(doctorId);
         theModel.addAttribute("doctor", theDoctor);
         List<Patient> result = new ArrayList<>();
-        //  if Patient name is empty return to prescription
-        if (thePatientSearch.trim().isEmpty()) {
-            for (Patient patient : theDoctor.getPatients()) {
-                if (patient.getPatientName().toLowerCase().contains(thePatientSearch.toLowerCase())) {
-                    result.add(patient);
-                }
+        // search by Patient name
+        for (Patient patient : theDoctor.getPatients()) {
+            if (patient.getPatientName().toLowerCase().contains(thePatientSearch.toLowerCase())) {
+                result.add(patient);
             }
-            // add drugs spring model
-            theModel.addAttribute("doctorPatients", result);
-            return "doctors/doctor-page";
-        } else {
-            // else, search by Patient name
-            for (Patient patient : theDoctor.getPatients()) {
-                if (patient.getPatientName().toLowerCase().contains(thePatientSearch.toLowerCase())) {
-                    result.add(patient);
-                }
-            }
-            // add drugs spring model
-            theModel.addAttribute("doctorPatients", result);
-            return "doctors/doctor-page";
         }
+        // add drugs spring model
+        theModel.addAttribute("doctorPatients", result);
+        return "doctors/doctor-page";
     }
 
     // mapping to update patient details

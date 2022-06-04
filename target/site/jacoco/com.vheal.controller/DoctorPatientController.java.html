@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorPatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.controller</a> &gt; <span class="el_source">DoctorPatientController.java</span></div><h1>DoctorPatientController.java</h1><pre class="source lang-java linenums">package com.vheal.controller;
+
+import com.vheal.entity.Doctor;
+import com.vheal.entity.Patient;
+import com.vheal.service.DoctorService;
+import com.vheal.service.DrugService;
+import com.vheal.service.PatientService;
+import com.vheal.service.PrescriptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//Controller for Doctor and Patient relations
+@Controller
+@RequestMapping(&quot;/doctors&quot;)
+public class DoctorPatientController {
+
+    private DoctorService doctorService;
+    private PatientService patientService;
+    private PrescriptionService prescriptionService;
+    private DrugService drugService;
+
+    //    constructor injection of service
+    @Autowired
+    public DoctorPatientController(DoctorService theDoctorService, PatientService thePatientService,
+<span class="fc" id="L32">                            PrescriptionService thePrescriptionService, DrugService theDrugService) {</span>
+<span class="fc" id="L33">        this.doctorService = theDoctorService;</span>
+<span class="fc" id="L34">        this.patientService = thePatientService;</span>
+<span class="fc" id="L35">        this.prescriptionService = thePrescriptionService;</span>
+<span class="fc" id="L36">        this.drugService = theDrugService;</span>
+<span class="fc" id="L37">    }</span>
+
+    // mapping to search patients for doctor
+    @GetMapping(&quot;/searchPatients&quot;)
+    public String searchPatients(@RequestParam(&quot;id&quot;) int doctorId, @RequestParam(&quot;patientSearch&quot;) String thePatientSearch, Model theModel) {
+
+<span class="fc" id="L43">        Doctor theDoctor = doctorService.findById(doctorId);</span>
+<span class="fc" id="L44">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="fc" id="L45">        List&lt;Patient&gt; patientList = theDoctor.getPatients();</span>
+<span class="fc" id="L46">        theModel.addAttribute(&quot;doctorPatients&quot;,patientList);</span>
+<span class="fc" id="L47">        List&lt;Patient&gt; result = new ArrayList&lt;&gt;();</span>
+        //  if Patient name is empty return to prescription
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (thePatientSearch.trim().isEmpty()) {</span>
+<span class="fc" id="L50">            return &quot;doctors/doctor-page&quot;;</span>
+        } else {
+            // else, search by Patient name
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            for (Patient patient : patientService.findAll()) {</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                if (patient.getPatientName().toLowerCase().contains(thePatientSearch.toLowerCase())) {</span>
+<span class="fc" id="L55">                    result.add(patient);</span>
+                }
+<span class="fc" id="L57">            }</span>
+            // add drugs spring model
+<span class="fc" id="L59">            theModel.addAttribute(&quot;patients&quot;, result);</span>
+<span class="fc" id="L60">            return &quot;doctors/doctor-page&quot;;</span>
+        }
+    }
+
+    // mapping to add patients for doctor
+    @GetMapping(&quot;/addDoctorPatient&quot;)
+    public String addDoctorPatient(@RequestParam(&quot;patientId&quot;) int thePatientId, @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+<span class="fc" id="L67">        Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="fc" id="L68">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="fc" id="L69">        List&lt;Patient&gt; patientList = theDoctor.getPatients();</span>
+
+        // add patient to doctor if not already prescribed
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if(!hasPatient(patientList, thePatient)){</span>
+            // use convenience method to add drug
+<span class="fc" id="L74">            theDoctor.addPatient(thePatient);</span>
+<span class="fc" id="L75">            patientService.save(thePatient);</span>
+<span class="fc" id="L76">            doctorService.save(theDoctor);</span>
+        }
+<span class="fc" id="L78">        theModel.addAttribute(&quot;doctorPatients&quot;, patientList);</span>
+<span class="fc" id="L79">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="fc" id="L80">        return &quot;doctors/doctor-page&quot;;</span>
+    }
+
+    public boolean hasPatient(List&lt;Patient&gt; patientList, Patient thePatient){
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        for (Patient tempPatient: patientList) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if(tempPatient.getId() == thePatient.getId()){</span>
+<span class="fc" id="L86">                return true;</span>
+            }
+<span class="fc" id="L88">        }</span>
+<span class="fc" id="L89">        return false;</span>
+    }
+
+    // mapping to remove patients for doctor
+    @GetMapping(&quot;/deleteDoctorPatient&quot;)
+    public String deletePatient(@RequestParam(&quot;doctorPatientId&quot;) int thePatientId, @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+<span class="fc" id="L95">        Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="fc" id="L96">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+
+        // use convenience method to delete drug
+<span class="fc" id="L99">        theDoctor.deletePatient(thePatient);</span>
+<span class="fc" id="L100">        Patient updatedPatient = patientService.findById(thePatientId);</span>
+<span class="fc" id="L101">        patientService.save(updatedPatient);</span>
+
+        // return updated Doctor
+<span class="fc" id="L104">        Doctor updatedDoctor = doctorService.findById(theDoctorId);</span>
+<span class="fc" id="L105">        doctorService.save(updatedDoctor);</span>
+<span class="fc" id="L106">        List&lt;Patient&gt; patientList = updatedDoctor.getPatients();</span>
+<span class="fc" id="L107">        theModel.addAttribute(&quot;doctorPatients&quot;, patientList);</span>
+<span class="fc" id="L108">        theModel.addAttribute(&quot;doctor&quot;, updatedDoctor);</span>
+<span class="fc" id="L109">        return &quot;doctors/doctor-page&quot;;</span>
+    }
+
+    // mapping to search patients of doctor
+    @GetMapping(&quot;/searchDoctorPatients&quot;)
+    public String searchDoctorPatients(@RequestParam(&quot;id&quot;) int doctorId, @RequestParam(&quot;doctorPatientSearch&quot;) String thePatientSearch, Model theModel) {
+
+<span class="fc" id="L116">        Doctor theDoctor = doctorService.findById(doctorId);</span>
+<span class="fc" id="L117">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="fc" id="L118">        List&lt;Patient&gt; result = new ArrayList&lt;&gt;();</span>
+        // search by Patient name
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (Patient patient : theDoctor.getPatients()) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            if (patient.getPatientName().toLowerCase().contains(thePatientSearch.toLowerCase())) {</span>
+<span class="fc" id="L122">                result.add(patient);</span>
+            }
+<span class="fc" id="L124">        }</span>
+        // add drugs spring model
+<span class="fc" id="L126">        theModel.addAttribute(&quot;doctorPatients&quot;, result);</span>
+<span class="fc" id="L127">        return &quot;doctors/doctor-page&quot;;</span>
+    }
+
+    // mapping to update patient details
+    @GetMapping(&quot;/patients/showFormForUpdatePatient&quot;)
+    public String showFormForUpdatePatients(@RequestParam(&quot;patientId&quot;) int theId, Model theModel){
+
+        // get Patient from service
+<span class="fc" id="L135">        Patient thePatient = patientService.findById(theId);</span>
+
+        // set patient as model attribute to pre-populate form
+<span class="fc" id="L138">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+
+<span class="fc" id="L140">        return &quot;patients/patient-form&quot;;</span>
+    }
+
+    // mapping to view Doctor's Patient
+    @GetMapping(&quot;/showPatient&quot;)
+    public String showPatient(@RequestParam(&quot;doctorPatientId&quot;) int thePatientId, @RequestParam(&quot;doctorId&quot;) int theDoctorId, Model theModel){
+<span class="fc" id="L146">        Patient thePatient = patientService.findById(thePatientId);</span>
+<span class="fc" id="L147">        Doctor theDoctor = doctorService.findById(theDoctorId);</span>
+<span class="fc" id="L148">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+<span class="fc" id="L149">        theModel.addAttribute(&quot;doctor&quot;, theDoctor);</span>
+<span class="fc" id="L150">        theModel.addAttribute(&quot;patientPrescriptions&quot;,thePatient.getPrescriptions());</span>
+<span class="fc" id="L151">        return &quot;patients/patient-page&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

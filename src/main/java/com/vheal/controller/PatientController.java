@@ -80,7 +80,7 @@ public class PatientController {
 
     // mapping to display Patient's UI page
     @GetMapping("/showPatient")
-    public String showDoctor(@ModelAttribute("patient") Patient thePatient, Model theModel){
+    public String showPatient(@ModelAttribute("patient") Patient thePatient, Model theModel){
         theModel.addAttribute("patientPrescriptions", thePatient.getPrescriptions());
         theModel.addAttribute("patient", thePatient);
         return "patients/patient-page";

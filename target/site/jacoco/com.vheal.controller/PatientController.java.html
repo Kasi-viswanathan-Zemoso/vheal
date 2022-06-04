@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.controller</a> &gt; <span class="el_source">PatientController.java</span></div><h1>PatientController.java</h1><pre class="source lang-java linenums">package com.vheal.controller;
+
+import com.vheal.entity.Doctor;
+import com.vheal.entity.Patient;
+import com.vheal.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@Controller
+@RequestMapping(&quot;/patients&quot;)
+public class PatientController {
+
+    private DoctorService doctorService;
+    private PatientService patientService;
+    private PrescriptionService prescriptionService;
+
+    //    constructor injection of service
+    @Autowired
+    public PatientController(DoctorService theDoctorService, PatientService thePatientService,
+<span class="fc" id="L25">                             PrescriptionService thePrescriptionService) {</span>
+<span class="fc" id="L26">        this.doctorService = theDoctorService;</span>
+<span class="fc" id="L27">        this.patientService = thePatientService;</span>
+<span class="fc" id="L28">        this.prescriptionService = thePrescriptionService;</span>
+<span class="fc" id="L29">    }</span>
+
+
+    // mapping to save Patient
+    @PostMapping(&quot;/savePatient&quot;)
+    public String savePatient(@ModelAttribute(&quot;patient&quot;) @Valid Patient thePatient, BindingResult bindingResult, Model theModel) {
+
+        // handle errors
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (bindingResult.hasErrors()) {</span>
+<span class="fc" id="L38">            return &quot;patients/patient-form&quot;;</span>
+        } else {
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if(patientService.findById(thePatient.getId()) != null){</span>
+<span class="nc" id="L42">                patientService.save(thePatient);</span>
+<span class="nc" id="L43">                theModel.addAttribute(&quot;patientPrescriptions&quot;, thePatient.getPrescriptions());</span>
+<span class="nc" id="L44">                theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+<span class="nc" id="L45">                theModel.addAttribute(&quot;doctor&quot;,thePatient.getDoctor());</span>
+<span class="nc" id="L46">                return &quot;patients/patient-page&quot;;</span>
+            }
+            // save new Patient
+<span class="nc" id="L49">            patientService.save(thePatient);</span>
+
+            // redirect to success
+<span class="nc" id="L52">            return &quot;register_success&quot;;</span>
+        }
+    }
+
+    // mapping to modify Doctor
+    @GetMapping(&quot;/showFormForUpdatePatient&quot;)
+    public String showFormForUpdatePatient(@RequestParam(&quot;patientId&quot;) int theId, Model theModel){
+
+        // get Patient from service
+<span class="fc" id="L61">        Patient thePatient = patientService.findById(theId);</span>
+
+        // set patient as model attribute to pre-populate form
+<span class="fc" id="L64">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+
+<span class="fc" id="L66">        return &quot;patients/patient-form&quot;;</span>
+    }
+
+    @GetMapping(&quot;/patients/showFormForUpdatePatient&quot;)
+    public String showFormForUpdatePatients(@RequestParam(&quot;patientId&quot;) int theId, Model theModel){
+
+        // get Patient from service
+<span class="fc" id="L73">        Patient thePatient = patientService.findById(theId);</span>
+
+        // set patient as model attribute to pre-populate form
+<span class="fc" id="L76">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+
+<span class="fc" id="L78">        return &quot;patients/patient-form&quot;;</span>
+    }
+
+    // mapping to display Patient's UI page
+    @GetMapping(&quot;/showPatient&quot;)
+    public String showPatient(@ModelAttribute(&quot;patient&quot;) Patient thePatient, Model theModel){
+<span class="nc" id="L84">        theModel.addAttribute(&quot;patientPrescriptions&quot;, thePatient.getPrescriptions());</span>
+<span class="nc" id="L85">        theModel.addAttribute(&quot;patient&quot;, thePatient);</span>
+<span class="nc" id="L86">        return &quot;patients/patient-page&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

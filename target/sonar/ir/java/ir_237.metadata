@@ -1,0 +1,2 @@
+com.vheal.controller.LoginController#login()Ljava/lang/String;
+com.vheal.controller.LoginController#getPrincipal()Lcom/vheal/entity/User;

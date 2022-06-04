@@ -1,0 +1,3 @@
+com.vheal.entity.Patient#getPrescriptions()Ljava/util/List;
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#

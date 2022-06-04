@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.vheal.DoctorPatientControllerTests
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.453 s - in com.vheal.DoctorPatientControllerTests

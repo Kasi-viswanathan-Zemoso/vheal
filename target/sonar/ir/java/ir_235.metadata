@@ -1,0 +1,5 @@
+com.vheal.controller.LoginController#showRegistrationForm(Lorg/springframework/ui/Model;)Ljava/lang/String;
+com.vheal.entity.Role#instance-init#
+com.vheal.entity.User#instance-init#
+com.vheal.entity.Role#<init>()V
+com.vheal.entity.User#<init>()V

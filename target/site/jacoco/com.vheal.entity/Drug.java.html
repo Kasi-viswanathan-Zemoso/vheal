@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Drug.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.entity</a> &gt; <span class="el_source">Drug.java</span></div><h1>Drug.java</h1><pre class="source lang-java linenums">package com.vheal.entity;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
+
+//create table &amp; sync to drug entity in sql workbench
+@Entity
+@Table(name=&quot;drug&quot;)
+public class Drug {
+
+    // fields for drug
+
+    // primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+    private int id;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;drug_name&quot;)
+    private String drugName;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;type&quot;)
+    private String type;
+
+    // many to many relationship with prescriptions
+    @ManyToMany(fetch=FetchType.LAZY,
+            cascade= {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = &quot;prescription_drug&quot;,
+            joinColumns = @JoinColumn(name = &quot;drug_id&quot;),
+            inverseJoinColumns = @JoinColumn(name = &quot;prescription_id&quot;)
+    )
+    private List&lt;Prescription&gt; prescriptions;
+
+
+    // constructors
+<span class="fc" id="L40">    public Drug(){}</span>
+
+<span class="fc" id="L42">    public Drug(int id, String drugName, String type) {</span>
+<span class="fc" id="L43">        this.id = id;</span>
+<span class="fc" id="L44">        this.drugName = drugName;</span>
+<span class="fc" id="L45">        this.type = type;</span>
+<span class="fc" id="L46">    }</span>
+
+<span class="fc" id="L48">    public Drug(String drugName, String type) {</span>
+<span class="fc" id="L49">        this.drugName = drugName;</span>
+<span class="fc" id="L50">        this.type = type;</span>
+<span class="fc" id="L51">    }</span>
+
+
+    // getters &amp; setters
+    public int getId() {
+<span class="fc" id="L56">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L60">        this.id = id;</span>
+<span class="fc" id="L61">    }</span>
+
+    public String getDrugName() {
+<span class="fc" id="L64">        return drugName;</span>
+    }
+
+    public void setDrugName(String drugName) {
+<span class="fc" id="L68">        this.drugName = drugName;</span>
+<span class="fc" id="L69">    }</span>
+
+    public String getType() {
+<span class="fc" id="L72">        return type;</span>
+    }
+
+    public void setType(String type) {
+<span class="fc" id="L76">        this.type = type;</span>
+<span class="fc" id="L77">    }</span>
+
+    public List&lt;Prescription&gt; getPrescriptions() {
+<span class="fc" id="L80">        return prescriptions;</span>
+    }
+
+    public void setPrescriptions(List&lt;Prescription&gt; prescriptions) {
+<span class="fc" id="L84">        this.prescriptions = prescriptions;</span>
+<span class="fc" id="L85">    }</span>
+
+    // define toString
+    @Override
+    public String toString() {
+<span class="fc" id="L90">        return &quot;Drug{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, drugName='&quot; + drugName + '\'' +
+                &quot;, type='&quot; + type + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

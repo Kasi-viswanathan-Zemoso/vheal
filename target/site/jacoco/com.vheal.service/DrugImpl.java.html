@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DrugImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.service</a> &gt; <span class="el_source">DrugImpl.java</span></div><h1>DrugImpl.java</h1><pre class="source lang-java linenums">package com.vheal.service;
+
+import com.vheal.dao.DrugRepository;
+import com.vheal.entity.Drug;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+// Implementation for Drug service
+@Service
+public class DrugImpl implements DrugService{
+
+    private DrugRepository drugRepository;
+
+    // constructor dependency injection
+    @Autowired
+<span class="fc" id="L20">    public DrugImpl(DrugRepository theDrugRepository){</span>
+<span class="fc" id="L21">        drugRepository = theDrugRepository;</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public List&lt;Drug&gt; findAll() {
+<span class="fc" id="L26">        return drugRepository.findAllByOrderByDrugNameAsc();</span>
+    }
+
+    @Override
+    public Drug findById(int theId) {
+<span class="fc" id="L31">        Optional&lt;Drug&gt; result = drugRepository.findById(theId);</span>
+
+<span class="fc" id="L33">        Drug theDrug = null;</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (result.isPresent()) {</span>
+<span class="fc" id="L36">            theDrug = result.get();</span>
+        }
+        else {
+            // we didn't find the drug return null
+<span class="fc" id="L40">            return theDrug;</span>
+        }
+<span class="fc" id="L42">        return theDrug;</span>
+    }
+
+    @Override
+    public void save(Drug theDrug) {
+<span class="fc" id="L47">        drugRepository.save(theDrug);</span>
+<span class="fc" id="L48">    }</span>
+
+    @Override
+    public void deleteById(int theId) {
+<span class="fc" id="L52">        drugRepository.deleteById(theId);</span>
+<span class="fc" id="L53">    }</span>
+
+    @Override
+    public Drug findDrug(String theDrug) {
+<span class="fc" id="L57">        return drugRepository.findByTypeStartingWith(theDrug);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

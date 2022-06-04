@@ -1,0 +1,164 @@
+
+ncom.vheal.controller.DoctorPatientController#deletePatient(IILorg/springframework/ui/Model;)Ljava/lang/String;p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java^ ^("startingBlock*½
+startingBlockq
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java^ ^(³°
+q
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java^~ ^(Œ(
+theModelorg.springframework.ui.Model"java.util.HashMap*
+1*¨-
+1p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java_ _(+é
+æ
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java_ _(+&
+%0 com.vheal.service.PatientService"__id*D*B.
+,com.vheal.controller.DoctorPatientController"
+patientServiceœ™
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java_ _(B
+%1com.vheal.entity.Patient"Fcom.vheal.service.PatientService#findById(I)Lcom/vheal/entity/Patient;*(
+&
+%0 com.vheal.service.PatientService*
+""2findById(I)Å
+Â
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java_ _(C&
+
+thePatientcom.vheal.entity.Patient"__id* 
+
+%1com.vheal.entity.Patientç
+ä
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java` `((%
+%2com.vheal.service.DoctorService"__id*C*A.
+,com.vheal.controller.DoctorPatientController"
+doctorService˜•
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java` `(>
+%3com.vheal.entity.Doctor"Dcom.vheal.service.DoctorService#findById(I)Lcom/vheal/entity/Doctor;*'
+%
+%2com.vheal.service.DoctorService*
+""2findById(I)Â
+¿
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.java` `(?$
+	theDoctorcom.vheal.entity.Doctor"__id*
+
+%3com.vheal.entity.DoctorÂ¿
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javac c(+
+
+%4void"Bcom.vheal.entity.Doctor#deletePatient(Lcom/vheal/entity/Patient;)V*&
+$
+	theDoctorcom.vheal.entity.Doctor*(
+&
+
+thePatientcom.vheal.entity.Patient2)deletePatient(Lcom/vheal/entity/Patient;)é
+æ
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javad! d(/&
+%5 com.vheal.service.PatientService"__id*D*B.
+,com.vheal.controller.DoctorPatientController"
+patientServiceœ™
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javad! d(F
+%6com.vheal.entity.Patient"Fcom.vheal.service.PatientService#findById(I)Lcom/vheal/entity/Patient;*(
+&
+%5 com.vheal.service.PatientService*
+""2findById(I)É
+Æ
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javad d(G*
+updatedPatientcom.vheal.entity.Patient"__id* 
+
+%6com.vheal.entity.Patienté
+æ
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javae e(&
+%7 com.vheal.service.PatientService"__id*D*B.
+,com.vheal.controller.DoctorPatientController"
+patientService¿¼
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javae e(+
+
+%8void"Bcom.vheal.service.PatientService#save(Lcom/vheal/entity/Patient;)V*(
+&
+%7 com.vheal.service.PatientService*,
+*
+updatedPatientcom.vheal.entity.Patient2 save(Lcom/vheal/entity/Patient;)ç
+ä
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javah h(,%
+%9com.vheal.service.DoctorService"__id*C*A.
+,com.vheal.controller.DoctorPatientController"
+doctorService™–
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javah h(B
+%10com.vheal.entity.Doctor"Dcom.vheal.service.DoctorService#findById(I)Lcom/vheal/entity/Doctor;*'
+%
+%9com.vheal.service.DoctorService*
+""2findById(I)Ç
+Ä
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javah h(C(
+updatedDoctorcom.vheal.entity.Doctor"__id* 
+
+%10com.vheal.entity.Doctorè
+å
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javai i(&
+%11com.vheal.service.DoctorService"__id*C*A.
+,com.vheal.controller.DoctorPatientController"
+doctorService»¸
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javai i()
+%12void"@com.vheal.service.DoctorService#save(Lcom/vheal/entity/Doctor;)V*(
+&
+%11com.vheal.service.DoctorService**
+(
+updatedDoctorcom.vheal.entity.Doctor2save(Lcom/vheal/entity/Doctor;)þû
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javaj$ j(?
+%13java.util.List"5com.vheal.entity.Doctor#getPatients()Ljava/util/List;**
+(
+updatedDoctorcom.vheal.entity.Doctor2getPatients()³
+°
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javaj j(@
+patientListjava.util.List"__id*
+
+%13java.util.List…
+‚
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javak k(<#
+%14org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*
+doctorPatients*
+
+patientListjava.util.Listˆ
+…
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javal l(6#
+%15org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*
+
+doctor**
+(
+updatedDoctorcom.vheal.entity.Doctorø
+õ
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javam m($
+%16"template!doctors/doctor-page*0".
+,com.vheal.controller.DoctorPatientController**
+(
+theModelorg.springframework.ui.Model"‹
+p
+f/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DoctorPatientController.javam m(%
+doctors/doctor-page:
+"":
+"":(
+theModelorg.springframework.ui.ModelB0.
+,com.vheal.controller.DoctorPatientController

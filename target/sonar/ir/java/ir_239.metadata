@@ -1,0 +1,3 @@
+com.vheal.controller.LoginController#processLogin(Lorg/springframework/ui/Model;)Ljava/lang/String;
+java.lang.String#contains(Ljava/lang/CharSequence;)Z
+org.springframework.security.core.context.SecurityContextHolder#getContext()Lorg/springframework/security/core/context/SecurityContext;

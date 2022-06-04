@@ -1,0 +1,50 @@
+
+_com.vheal.controller.DrugController#listDrugs(Lorg/springframework/ui/Model;)Ljava/lang/String;g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java! !("startingBlock*©
+startingBlockg
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java! !(+©¦
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java! !(*(
+theModelorg.springframework.ui.Model"java.util.HashMap*
+1*±
+
+1g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java$ $()Ñ
+Î
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java$ $()#
+%0com.vheal.service.DrugService"__id*8*6%
+#com.vheal.controller.DrugController"
+drugServiceíê
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java$ $(3
+%1java.util.List"7com.vheal.service.DrugService#findAll()Ljava/util/List;*%
+#
+%0com.vheal.service.DrugService2	findAll()¦
+£
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java$ $(4
+theDrugsjava.util.List"__id*
+
+%1java.util.Listï
+ì
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java' '(0"
+%2org.springframework.ui.Model"__mapSet**
+(
+theModelorg.springframework.ui.Model*	
+drugs*
+
+theDrugsjava.util.Listâ
+ß
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java) )(!
+%3"template!drugs/list-drugs*'"%
+#com.vheal.controller.DrugController**
+(
+theModelorg.springframework.ui.Model"
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java) )("
+drugs/list-drugs:(
+theModelorg.springframework.ui.ModelB'%
+#com.vheal.controller.DrugController

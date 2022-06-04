@@ -1,0 +1,3 @@
+com.vheal.config.WebSecurityConfig#userDetailsService()Lorg/springframework/security/core/userdetails/UserDetailsService;
+com.vheal.service.CustomUserDetailsService#<init>(Lcom/vheal/dao/UserRepository;)V
+com.vheal.service.CustomUserDetailsService#instance-init#

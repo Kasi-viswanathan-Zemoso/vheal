@@ -1,0 +1,21 @@
+
+<com.vheal.service.PrescriptionImpl#findAll()Ljava/util/List;f
+\/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/service/PrescriptionImpl.java (%"1*û
+1f
+\/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/service/PrescriptionImpl.java (%á
+Þ
+f
+\/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/service/PrescriptionImpl.java (%*
+%0$com.vheal.dao.PrescriptionRepository"__id*B*@$
+"com.vheal.service.PrescriptionImpl"
+prescriptionRepository¦£
+f
+\/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/service/PrescriptionImpl.java (E
+%1java.util.List"Tcom.vheal.dao.PrescriptionRepository#findAllByOrderBySuggestionAsc()Ljava/util/List;*,
+*
+%0$com.vheal.dao.PrescriptionRepository2findAllByOrderBySuggestionAsc()"€
+f
+\/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/service/PrescriptionImpl.java (F
+
+%1java.util.ListB&$
+"com.vheal.service.PrescriptionImpl

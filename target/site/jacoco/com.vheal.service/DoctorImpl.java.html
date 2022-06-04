@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.service</a> &gt; <span class="el_source">DoctorImpl.java</span></div><h1>DoctorImpl.java</h1><pre class="source lang-java linenums">package com.vheal.service;
+
+import com.vheal.dao.DoctorRepository;
+import com.vheal.entity.Doctor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+// Implementation for Doctor service
+@Service
+public class DoctorImpl implements DoctorService{
+
+    private DoctorRepository doctorRepository;
+
+//    constructor dependency injection
+    @Autowired
+<span class="fc" id="L19">    public DoctorImpl(DoctorRepository theDoctorRepository){</span>
+<span class="fc" id="L20">        doctorRepository = theDoctorRepository;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public List&lt;Doctor&gt; findAll() {
+<span class="fc" id="L25">        return doctorRepository.findAllByOrderByDoctorNameAsc();</span>
+    }
+
+    @Override
+    public Doctor findById(int theId) {
+<span class="fc" id="L30">        Optional&lt;Doctor&gt; result = doctorRepository.findById(theId);</span>
+
+<span class="fc" id="L32">        Doctor theDoctor = null;</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (result.isPresent()) {</span>
+<span class="fc" id="L35">            theDoctor = result.get();</span>
+        }
+        else {
+            // we didn't find the Doctor return null
+<span class="fc" id="L39">            return theDoctor;</span>
+        }
+<span class="fc" id="L41">        return theDoctor;</span>
+    }
+
+    @Override
+    public void save(Doctor theDoctor) {
+<span class="fc" id="L46">        doctorRepository.save(theDoctor);</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public void deleteById(int theId) {
+<span class="fc" id="L51">        doctorRepository.deleteById(theId);</span>
+<span class="fc" id="L52">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

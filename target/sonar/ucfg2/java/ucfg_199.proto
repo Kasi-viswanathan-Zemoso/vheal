@@ -1,0 +1,59 @@
+
+kcom.vheal.controller.LoginController#showRegistrationForm(Lorg/springframework/ui/Model;)Ljava/lang/String;h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java6 6(&"startingBlock*¨
+startingBlockh
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java6& 6(3§¤
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java6' 6(2%
+modelorg.springframework.ui.Model"java.util.HashMap*
+1*Ý
+1h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java7 7(¡ž
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java7' 7(+
+%0com.vheal.entity.User"com.vheal.entity.User³
+°
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java7# 7(-
+%1"com.vheal.entity.User#<init>()V*
+
+%0com.vheal.entity.Userí
+ê
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java7 7(."
+%2org.springframework.ui.Model"__mapSet*'
+%
+modelorg.springframework.ui.Model*
+user*
+
+%0com.vheal.entity.User¡ž
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java8& 8(*
+%3com.vheal.entity.Role"com.vheal.entity.Role³
+°
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java8" 8(,
+%4"com.vheal.entity.Role#<init>()V*
+
+%3com.vheal.entity.Roleí
+ê
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java8 8(-"
+%5org.springframework.ui.Model"__mapSet*'
+%
+modelorg.springframework.ui.Model*
+role*
+
+%3com.vheal.entity.RoleÜ
+Ù
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java9 9(
+%6"template!signup_form*("&
+$com.vheal.controller.LoginController*'
+%
+modelorg.springframework.ui.Model"{
+h
+^/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/LoginController.java9 9(
+signup_form:%
+modelorg.springframework.ui.ModelB(&
+$com.vheal.controller.LoginController

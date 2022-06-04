@@ -1,0 +1,3 @@
+com.vheal.entity.Prescription#deleteDrug(Lcom/vheal/entity/Drug;)V
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#

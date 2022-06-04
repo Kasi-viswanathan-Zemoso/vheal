@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebSecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.config</a> &gt; <span class="el_source">WebSecurityConfig.java</span></div><h1>WebSecurityConfig.java</h1><pre class="source lang-java linenums">package com.vheal.config;
+
+import com.vheal.dao.UserRepository;
+import com.vheal.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.sql.DataSource;
+
+@Configuration
+@EnableWebSecurity
+<span class="fc" id="L20">public class WebSecurityConfig extends WebSecurityConfigurerAdapter {</span>
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private UserRepository userRepo;
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+<span class="fc" id="L29">        return new CustomUserDetailsService(userRepo);</span>
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+<span class="fc" id="L34">        return new BCryptPasswordEncoder();</span>
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+<span class="fc" id="L39">        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();</span>
+<span class="fc" id="L40">        authProvider.setUserDetailsService(userDetailsService());</span>
+<span class="fc" id="L41">        authProvider.setPasswordEncoder(passwordEncoder());</span>
+
+<span class="fc" id="L43">        return authProvider;</span>
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+<span class="fc" id="L48">        auth.authenticationProvider(authenticationProvider());</span>
+<span class="fc" id="L49">    }</span>
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+<span class="fc" id="L53">        http.authorizeRequests()</span>
+<span class="fc" id="L54">                .antMatchers(&quot;/&quot;).permitAll()</span>
+<span class="fc" id="L55">                .antMatchers(&quot;/register&quot;).permitAll()</span>
+<span class="fc" id="L56">                .antMatchers(&quot;/processRegister&quot;).permitAll()</span>
+<span class="fc" id="L57">                .antMatchers(&quot;/register_success&quot;).permitAll()</span>
+<span class="fc" id="L58">                .antMatchers(&quot;/processLogin&quot;).permitAll()</span>
+<span class="fc" id="L59">                .antMatchers(&quot;/login&quot;).permitAll()</span>
+<span class="fc" id="L60">                .antMatchers(&quot;/doctors/showFormForAddPrescription&quot;).hasAuthority(&quot;DOCTOR&quot;)</span>
+<span class="fc" id="L61">                .antMatchers(&quot;/doctors/**&quot;).permitAll()</span>
+<span class="fc" id="L62">                .antMatchers(&quot;/patients/**&quot;).permitAll()</span>
+<span class="fc" id="L63">                .antMatchers(&quot;/prescriptions/showFormForUpdate&quot;).hasAuthority(&quot;DOCTOR&quot;)</span>
+<span class="fc" id="L64">                .antMatchers(&quot;/prescriptions/**&quot;).permitAll()</span>
+<span class="fc" id="L65">                .antMatchers(&quot;/users/**&quot;).hasAnyAuthority(&quot;DOCTOR&quot;,&quot;ADMIN&quot;)</span>
+<span class="fc" id="L66">                .antMatchers(&quot;/drugs/**&quot;).hasAnyAuthority(&quot;DOCTOR&quot;,&quot;ADMIN&quot;)</span>
+<span class="fc" id="L67">                .antMatchers(&quot;/admins/**&quot;).hasAuthority(&quot;ADMIN&quot;)</span>
+<span class="fc" id="L68">                .anyRequest().authenticated()</span>
+<span class="fc" id="L69">                .and()</span>
+<span class="fc" id="L70">                .formLogin()</span>
+<span class="fc" id="L71">                .loginPage(&quot;/login&quot;)</span>
+<span class="fc" id="L72">                .usernameParameter(&quot;email&quot;)</span>
+<span class="fc" id="L73">                .defaultSuccessUrl(&quot;/processLogin&quot;)</span>
+<span class="fc" id="L74">                .permitAll()</span>
+<span class="fc" id="L75">                .and()</span>
+<span class="fc" id="L76">                .logout().</span>
+<span class="fc" id="L77">                logoutSuccessUrl(&quot;/login&quot;)</span>
+<span class="fc" id="L78">                .permitAll()</span>
+<span class="fc" id="L79">                .and()</span>
+<span class="fc" id="L80">                .exceptionHandling().accessDeniedPage(&quot;/access-denied&quot;);</span>
+<span class="fc" id="L81">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

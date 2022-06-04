@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Patient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vheal</a> &gt; <a href="index.source.html" class="el_package">com.vheal.entity</a> &gt; <span class="el_source">Patient.java</span></div><h1>Patient.java</h1><pre class="source lang-java linenums">package com.vheal.entity;
+
+import org.hibernate.validator.constraints.Range;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+
+//create table &amp; sync to patient entity in sql workbench
+@Component
+@Entity
+@Table(name=&quot;patient&quot;)
+public class Patient {
+
+    // fields for patient
+
+    //    primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+    private int id;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;patient_name&quot;)
+    private String patientName;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Pattern(regexp=&quot;^[0-9]{10}&quot;, message = &quot;enter valid 10 digit number&quot;)
+    @Column(name = &quot;phone_no&quot;)
+    private String phoneNo;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Range(min = 1, max = 150, message = &quot;enter valid age&quot;)
+    @Column(name = &quot;age&quot;)
+    private String age;
+
+    @NotBlank(message = &quot;choose your gender&quot;)
+    @Column(name = &quot;gender&quot;)
+    private String gender;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;city&quot;)
+    private String city;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;state&quot;)
+    private String state;
+
+    @NotBlank(message = &quot;is required&quot;)
+    @Column(name = &quot;country&quot;)
+    private String country;
+
+    // One to One Mapping with User entity
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = &quot;user_id&quot;)
+    private User user;
+
+    // many to many relationship with doctors
+    @ManyToMany(fetch=FetchType.LAZY,
+            cascade= {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = &quot;doctor_patient&quot;,
+            joinColumns = @JoinColumn(name = &quot;patient_id&quot;),
+            inverseJoinColumns = @JoinColumn(name = &quot;doctor_id&quot;))
+    private List&lt;Doctor&gt; doctors;
+
+
+    // one to many relationship with prescription
+    @OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.REMOVE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name=&quot;patient_id&quot;)
+    private List&lt;Prescription&gt; prescriptions;
+
+
+    // constructors
+<span class="fc" id="L81">    public Patient(){}</span>
+
+    public Patient(String patientName, String phoneNo, String age, String gender,
+<span class="fc" id="L84">                   String city, String state, String country) {</span>
+<span class="fc" id="L85">        this.patientName = patientName;</span>
+<span class="fc" id="L86">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L87">        this.age = age;</span>
+<span class="fc" id="L88">        this.gender = gender;</span>
+<span class="fc" id="L89">        this.city = city;</span>
+<span class="fc" id="L90">        this.state = state;</span>
+<span class="fc" id="L91">        this.country = country;</span>
+<span class="fc" id="L92">    }</span>
+
+    public Patient(int id, String patientName, String phoneNo, String age, String gender,
+<span class="fc" id="L95">                   String city, String state, String country) {</span>
+<span class="fc" id="L96">        this.id = id;</span>
+<span class="fc" id="L97">        this.patientName = patientName;</span>
+<span class="fc" id="L98">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L99">        this.age = age;</span>
+<span class="fc" id="L100">        this.gender = gender;</span>
+<span class="fc" id="L101">        this.city = city;</span>
+<span class="fc" id="L102">        this.state = state;</span>
+<span class="fc" id="L103">        this.country = country;</span>
+<span class="fc" id="L104">    }</span>
+
+    // getters &amp; setters
+    public int getId() {
+<span class="fc" id="L108">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L112">        this.id = id;</span>
+<span class="fc" id="L113">    }</span>
+
+    public String getPatientName() {
+<span class="fc" id="L116">        return patientName;</span>
+    }
+
+    public void setPatientName(String patientName) {
+<span class="fc" id="L120">        this.patientName = patientName;</span>
+<span class="fc" id="L121">    }</span>
+
+    public String getPhoneNo() {
+<span class="fc" id="L124">        return phoneNo;</span>
+    }
+
+    public void setPhoneNo(String phoneNo) {
+<span class="fc" id="L128">        this.phoneNo = phoneNo;</span>
+<span class="fc" id="L129">    }</span>
+
+    public String getAge() {
+<span class="fc" id="L132">        return age;</span>
+    }
+
+    public void setAge(String age) {
+<span class="fc" id="L136">        this.age = age;</span>
+<span class="fc" id="L137">    }</span>
+
+    public String getGender() {
+<span class="fc" id="L140">        return gender;</span>
+    }
+
+    public void setGender(String gender) {
+<span class="fc" id="L144">        this.gender = gender;</span>
+<span class="fc" id="L145">    }</span>
+
+    public String getCity() {
+<span class="fc" id="L148">        return city;</span>
+    }
+
+    public void setCity(String city) {
+<span class="fc" id="L152">        this.city = city;</span>
+<span class="fc" id="L153">    }</span>
+
+    public String getState() {
+<span class="fc" id="L156">        return state;</span>
+    }
+
+    public void setState(String state) {
+<span class="fc" id="L160">        this.state = state;</span>
+<span class="fc" id="L161">    }</span>
+
+    public String getCountry() {
+<span class="fc" id="L164">        return country;</span>
+    }
+
+    public void setCountry(String country) {
+<span class="fc" id="L168">        this.country = country;</span>
+<span class="fc" id="L169">    }</span>
+
+    public List&lt;Doctor&gt; getDoctors() {
+<span class="fc" id="L172">        return doctors;</span>
+    }
+
+    public void setDoctors(List&lt;Doctor&gt; doctors) {
+<span class="fc" id="L176">        this.doctors = doctors;</span>
+<span class="fc" id="L177">    }</span>
+
+    public List&lt;Prescription&gt; getPrescriptions() {
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if(prescriptions == null ){return prescriptions;}</span>
+<span class="fc" id="L181">        List&lt;Prescription&gt; sortedPrescription = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        for(int i = prescriptions.size() - 1; i &gt;= 0; i--){</span>
+<span class="fc" id="L183">            sortedPrescription.add(prescriptions.get(i));</span>
+        }
+<span class="fc" id="L185">        return sortedPrescription;</span>
+    }
+
+    public void setPrescriptions(List&lt;Prescription&gt; prescriptions) {
+<span class="fc" id="L189">        this.prescriptions = prescriptions;</span>
+<span class="fc" id="L190">    }</span>
+
+    public User getUser() {
+<span class="fc" id="L193">        return user;</span>
+    }
+
+    public void setUser(User user) {
+<span class="fc" id="L197">        this.user = user;</span>
+<span class="fc" id="L198">    }</span>
+
+
+    // convenience methods
+    public void addPrescription(Prescription thePrescription){
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if(prescriptions == null){</span>
+<span class="fc" id="L204">            prescriptions = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L206">        prescriptions.add(thePrescription);</span>
+<span class="fc" id="L207">    }</span>
+
+    public void deletePrescription(Prescription thePrescription) {
+<span class="fc" id="L210">        List&lt;Prescription&gt; newPrescriptions = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        for (Prescription tempPrescription : prescriptions) {</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if(tempPrescription.getId() != thePrescription.getId()){</span>
+<span class="nc" id="L213">                newPrescriptions.add(tempPrescription);</span>
+            }
+<span class="nc" id="L215">        }</span>
+<span class="nc" id="L216">        this.prescriptions = newPrescriptions;</span>
+<span class="nc" id="L217">    }</span>
+
+    public Doctor getDoctor(){
+<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        if(doctors.isEmpty()){</span>
+<span class="nc" id="L221">            return null;</span>
+        }
+<span class="fc" id="L223">        return doctors.get(0);</span>
+    }
+
+
+    // toString
+    @Override
+    public String toString() {
+<span class="fc" id="L230">        return &quot;Patient{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, patientName='&quot; + patientName + '\'' +
+                &quot;, phoneNo='&quot; + phoneNo + '\'' +
+                &quot;, age='&quot; + age + '\'' +
+                &quot;, gender='&quot; + gender + '\'' +
+                &quot;, city='&quot; + city + '\'' +
+                &quot;, state='&quot; + state + '\'' +
+                &quot;, country='&quot; + country + '\'' +
+                '}';
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,23 @@
+
+?com.vheal.controller.DrugController#delete(I)Ljava/lang/String;g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.javaW W("1*­
+1g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.javaZ Z(Ñ
+Î
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.javaZ Z(#
+%0com.vheal.service.DrugService"__id*8*6%
+#com.vheal.controller.DrugController"
+drugServiceäá
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.javaZ Z(%
+
+%1void",com.vheal.service.DrugService#deleteById(I)V*%
+#
+%0com.vheal.service.DrugService*
+""2deleteById(I)"ƒ
+g
+]/home/viswak/Desktop/Projects/vheal-v2/src/main/java/com/vheal/controller/DrugController.java] ](&
+redirect:/drugs/list:
+""B'%
+#com.vheal.controller.DrugController

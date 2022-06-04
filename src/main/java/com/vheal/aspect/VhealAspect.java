@@ -1,7 +1,5 @@
 package com.vheal.aspect;
 
-import com.vheal.entity.Doctor;
-import com.vheal.entity.Role;
 import com.vheal.entity.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -11,7 +9,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Aspect

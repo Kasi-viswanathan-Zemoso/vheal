@@ -1,0 +1,3 @@
+com.vheal.entity.User#addRole(Lcom/vheal/entity/Role;)V
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#
